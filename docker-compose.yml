@@ -16,6 +16,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.echogram_backend.rule=Host(`echogram.zethange.ru`)"
       - "traefik.http.routers.echogram_backend.entrypoints=web"
+      - "traefik.http.services.echogram_backend.loadbalancer.server.port=8080"
 
   db:
     image: postgres:17-alpine
