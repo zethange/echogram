@@ -1,0 +1,30 @@
+services:
+  backend:
+    image: ghcr.io/zethange/echogram:latest
+    restart: unless-stopped
+    environment:
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=${DB_DATABASE}
+    depends_on:
+      - db
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.echogram_backend.rule=Host(`echogram.zethange.ru`)"
+      - "traefik.http.routers.echogram_backend.entrypoints=web"
+
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_DATABASE=${DB_DATABASE}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+
+networks:
+  web:
+    external: true
