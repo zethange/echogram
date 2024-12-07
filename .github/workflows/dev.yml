@@ -68,7 +68,7 @@ jobs:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_DATABASE: echogram
         with:
-          envs: DB_DATABASE,DB_USERNAME,DB_PASSWORD
+          envs: DB_USERNAME,DB_PASSWORD,DB_DATABASE
           host: ${{ secrets.HOST_ADDRESS }}
           username: ${{ secrets.HOST_USERNAME }}
           password: ${{ secrets.HOST_PASSWORD }}
