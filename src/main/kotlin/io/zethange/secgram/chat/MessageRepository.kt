@@ -1,4 +1,4 @@
-package io.zethange.secgram
+package io.zethange.secgram.chat
 
 import io.zethange.secgram.chat.entities.Chat
 import io.zethange.secgram.chat.entities.Message

@@ -1,6 +1,5 @@
 package io.zethange.secgram.chat
 
-import io.zethange.secgram.MessageRepository
 import io.zethange.secgram.chat.dto.ChatDto
 import io.zethange.secgram.chat.dto.MessageDto
 import io.zethange.secgram.chat.dto.toDto
