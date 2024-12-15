@@ -1,4 +1,4 @@
-FROM amazoncorretto:23-alpine
+FROM ghcr.io/graalvm/jdk-community:23
 
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
