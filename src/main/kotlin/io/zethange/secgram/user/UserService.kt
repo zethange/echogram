@@ -6,6 +6,7 @@ import io.zethange.secgram.user.entities.User
 import io.zethange.secgram.utils.CustomException
 import io.zethange.secgram.utils.JwtService
 import jakarta.transaction.Transactional
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
@@ -17,8 +18,8 @@ import java.util.*
 
 @Service
 class UserService(private val userRepository: UserRepository, private val jwtService: JwtService, private val passwordEncoder: PasswordEncoder) : UserDetailsService {
-    fun getUsers(): List<UserDto> {
-        return userRepository.findAll().map { it.toDto() }.toList()
+    fun getUsers(pageable: Pageable, search: String): List<UserDto> {
+        return userRepository.searchByUsername(search, pageable).map { it.toDto() }.toList()
     }
 
     @Transactional

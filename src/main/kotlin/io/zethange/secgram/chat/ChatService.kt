@@ -1,10 +1,13 @@
 package io.zethange.secgram.chat
 
 import io.zethange.secgram.chat.dto.ChatDto
+import io.zethange.secgram.chat.dto.CreateChatDto
 import io.zethange.secgram.chat.dto.MessageDto
 import io.zethange.secgram.chat.dto.toDto
+import io.zethange.secgram.chat.entities.Chat
 import io.zethange.secgram.chat.entities.ChatType
 import io.zethange.secgram.user.UserService
+import io.zethange.secgram.user.entities.User
 import io.zethange.secgram.utils.CustomException
 import io.zethange.secgram.utils.PageDto
 import io.zethange.secgram.utils.toDto
@@ -50,5 +53,18 @@ class ChatService(private val chatRepository: ChatRepository, private val messag
         val messagePage = messageRepository.findByChat(chat, pageable)
 
         return messagePage.map { it.toDto() }.toDto()
+    }
+
+    fun createChat(dto: CreateChatDto): ChatDto {
+        val chat = Chat(
+            type = dto.type,
+            title = dto.title,
+            messages = emptySet(),
+            participants = dto.participants.map { User(
+                id = it,
+            ) }.toSet()
+        )
+
+        return chatRepository.save(chat).toDto()
     }
 }

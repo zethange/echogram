@@ -16,10 +16,10 @@ data class FullUserDto(
 fun User.toFullDto(): FullUserDto {
     return FullUserDto(
         id = id!!,
-        name = name,
+        name = name!!,
         username = username,
-        email = email,
-        phoneNumber = phoneNumber,
-        role = role
+        email = email!!,
+        phoneNumber = phoneNumber!!,
+        role = role!!
     )
 }

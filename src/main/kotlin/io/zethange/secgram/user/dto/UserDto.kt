@@ -14,8 +14,8 @@ data class UserDto(
 fun User.toDto(): UserDto {
     return UserDto(
         id = id!!,
-        name = name,
+        name = name!!,
         username = username,
-        role = role
+        role = role!!
     )
 }

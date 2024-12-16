@@ -15,32 +15,32 @@ class User(
     var id: UUID? = null,
 
     @Column
-    var name: String,
+    var name: String? = null,
 
     @Column(unique = true)
-    private var username: String,
+    private var username: String? = null,
 
     @Column(unique = true)
-    var email: String,
+    var email: String? = null,
 
     @Column(unique = true)
-    var phoneNumber: String,
+    var phoneNumber: String? = null,
 
-    private var password: String,
+    private var password: String? = null,
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var role: Role,
+    var role: Role? = null,
 
     @ManyToMany(fetch = FetchType.LAZY)
     val chats: Set<Chat> = emptySet(),
 ) : UserDetails {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        return mutableListOf(SimpleGrantedAuthority(role.name))
+        return mutableListOf(SimpleGrantedAuthority(role?.name))
     }
 
-    override fun getPassword(): String = password
-    override fun getUsername(): String = username
+    override fun getPassword(): String = password!!
+    override fun getUsername(): String = username!!
     fun setUsername(username: String) {
         this.username = username
     }

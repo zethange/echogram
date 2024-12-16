@@ -7,6 +7,7 @@ import io.zethange.secgram.user.dto.RegisterDto
 import io.zethange.secgram.user.dto.UserDto
 import io.zethange.secgram.user.dto.toFullDto
 import jakarta.validation.Valid
+import org.springframework.data.domain.Pageable
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -16,9 +17,9 @@ import java.util.*
 @Tag(name = "Users")
 class UserController(private val userService: UserService) {
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
-    fun getUsers(): List<UserDto> {
-        return userService.getUsers()
+    @PreAuthorize("isAuthenticated()")
+    fun getUsers(pageable: Pageable, search: String): List<UserDto> {
+        return userService.getUsers(pageable, search)
     }
 
     @GetMapping("/{id}")
