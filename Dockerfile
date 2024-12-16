@@ -7,5 +7,6 @@ WORKDIR /app
 
 ARG JAR_FILE=build/libs/*.jar
 COPY ${JAR_FILE} app.jar
+COPY entrypoint.sh .
 
-ENTRYPOINT ["java","-jar","/app/app.jar","io.zethange.secgram.SecgramApplication"]
+ENTRYPOINT ["sh", "/app/entrypoint.sh"]
